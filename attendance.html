@@ -1,116 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <title>الغياب والحضور – SchoolMate</title>
-</head>
-<body bgcolor="#C8BBBE">
-  <h1 align="center">الغياب والحضور</h1>
-  <p align="center">سجل حضور الطلاب يوميًا بسهولة</p>
-  <hr color="black" size="3">
-
-  <div align="center">
-    <button onclick="clearData()">🗑 مسح كل البيانات</button>
-  </div>
-  <br>
-
-  <table border="1" width="90%" align="center" cellpadding="3" bgcolor="#DEB887" id="attendanceTable">
-    <tr bgcolor="#C58917">
-      <th>الاسم</th>
-      <!-- العناوين هتتولد بالـ JavaScript -->
-    </tr>
-
-    <tr>
-      <td>عمار</td>
-    </tr>
-    <tr>
-      <td>غزل</td>
-    </tr>
-    <tr>
-      <td>سالمين</td>
-    </tr>
-    <tr>
-      <td>محمد</td>
-    </tr>
-  </table>
-
-  <br>
-  <p style="cursor:pointer; color:blue;" onclick="window.location.href='index.html'">  الرجوع للصفحة الرئيسية</p>
-
-  <script>
-    const days = ["الأحد","الإثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
-    const table = document.getElementById("attendanceTable");
-    const startDate = new Date(2025, 9, 12); // الأحد 12 أكتوبر 2025 (الشهر 9 لأن الأشهر تبدأ من 0)
-    const totalDays = 14; // أسبوعين
-
-    // توليد الصف العلوي (العناوين)
-    for (let i = 0; i < totalDays; i++) {
-      let dayIndex = (startDate.getDay() + i) % 7;
-      let date = new Date(startDate);
-      date.setDate(startDate.getDate() + i);
-      let header = document.createElement("th");
-      header.innerText = days[dayIndex] + " " + date.toLocaleDateString("ar-EG");
-      table.rows[0].appendChild(header);
-    }
-
-    // توليد الأزرار لكل طالب
-    for (let r = 1; r < table.rows.length; r++) {
-      let studentName = table.rows[r].cells[0].innerText;
-      for (let c = 0; c < totalDays; c++) {
-        let cell = document.createElement("td");
-
-        if (days[(startDate.getDay() + c) % 7] === "الجمعة" || days[(startDate.getDay() + c) % 7] === "السبت") {
-          cell.innerHTML = "إجازة";
-          cell.bgColor = "#EBDDE2";
-          cell.style.fontSize = "10px";
-        } else {
-          let presentBtn = document.createElement("button");
-          presentBtn.innerText = "✔";
-          presentBtn.onclick = function () { markAttendance(studentName, c, "حضور", cell); };
-
-          let absentBtn = document.createElement("button");
-          absentBtn.innerText = "✘";
-          absentBtn.onclick = function () { markAttendance(studentName, c, "غياب", cell); };
-
-          cell.appendChild(presentBtn);
-          cell.appendChild(absentBtn);
-
-          // تحميل الحالة من التخزين
-          let saved = localStorage.getItem(studentName + "_" + c);
-          if (saved) {
-            if (saved === "حضور") {
-              cell.style.backgroundColor = "#4CAF50";
-              cell.innerHTML = "✔ حضور";
-            } else if (saved === "غياب") {
-              cell.style.backgroundColor = "#F44336";
-              cell.innerHTML = "✘ غياب";
-            }
-          }
-        }
-
-        table.rows[r].appendChild(cell);
-      }
-    }
-
-    // دالة تسجيل الحضور/الغياب
-    function markAttendance(student, day, status, cell) {
-      if (status === "حضور") {
-        cell.style.backgroundColor = "#4CAF50";
-        cell.innerHTML = "✔ حضور";
-      } else {
-        cell.style.backgroundColor = "#F44336";
-        cell.innerHTML = "✘ غياب";
-      }
-      localStorage.setItem(student + "_" + day, status);
-    }
-
-    // دالة مسح البيانات
-    function clearData() {
-      if (confirm("هل أنت متأكد أنك تريد مسح جميع البيانات؟")) {
-        localStorage.clear();
-        location.reload(); // إعادة تحميل الصفحة
-      }
-    }
-  </script>
-</body>
-</html>
