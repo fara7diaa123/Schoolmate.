@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>درجات الطلاب – SchoolMate</title>
+</head>
+<body bgcolor="#C8BBBE">
+  <h1 align="center">درجات الطلاب الشهرية</h1>
+  <p align="center">سجل درجات الطلاب بسهولة</p>
+  <hr color="white" size="3">
+  
+  <!-- الدرجة النهائية على اليمين تحت الخط -->
+  <p style="text-align:right; color:rgb(0, 0, 0); font-weight:bold;">الدرجة النهائية لكل مادة: 20</p>
+
+  <div align="center">
+    <button onclick="clearData()">🗑 مسح كل البيانات</button>
+  </div>
+  <br>
+
+  <table border="1" width="90%" align="center" cellpadding="3" bgcolor="#DEB887" id="gradesTable">
+    <tr bgcolor="#C58917">
+      <th>الاسم</th>
+      <!-- العناوين هتتولد بالـ JavaScript -->
+    </tr>
+
+    <tr>
+      <td>عمار</td>
+    </tr>
+    <tr>
+      <td>غزل</td>
+    </tr>
+    <tr>
+      <td>سالمين</td>
+    </tr>
+    <tr>
+      <td>محمد</td>
+    </tr>
+  </table>
+
+  <br>
+  <p style="cursor:pointer; color:blue;" onclick="window.location.href='index.html'">⬅ الرجوع للصفحة الرئيسية</p>
+
+  <script>
+    const subjects = ["عربي","إنجليزي","ماث","ساينس","تاريخ","فلسفة"];
+    const months = ["أكتوبر","نوفمبر","ديسمبر"];
+    const table = document.getElementById("gradesTable");
+    const maxGrade = 20;
+
+    // توليد الصف العلوي (العناوين)
+    for (let m = 0; m < months.length; m++) {
+      for (let s = 0; s < subjects.length; s++) {
+        let header = document.createElement("th");
+        header.innerText = subjects[s] + " (" + months[m] + ")";
+        table.rows[0].appendChild(header);
+      }
+    }
+
+    // توليد خلايا الدرجات لكل طالب
+    for (let r = 1; r < table.rows.length; r++) {
+      let studentName = table.rows[r].cells[0].innerText;
+      for (let m = 0; m < months.length; m++) {
+        for (let s = 0; s < subjects.length; s++) {
+          let cell = document.createElement("td");
+          let input = document.createElement("input");
+          input.type = "number";
+          input.min = 0;
+          input.max = maxGrade;
+          input.style.width = "50px";
+
+          // منع الرقم الأكبر من الدرجة النهائية
+          input.oninput = function () {
+            if (input.value > maxGrade) {
+              alert("الدرجة لا يمكن أن تتجاوز " + maxGrade);
+              input.value = "";
+            }
+          };
+
+          // حفظ الرقم في localStorage
+          input.onchange = function () {
+            localStorage.setItem(studentName + "_" + subjects[s] + "_" + months[m], input.value);
+          };
+
+          // تحميل الرقم من التخزين
+          let saved = localStorage.getItem(studentName + "_" + subjects[s] + "_" + months[m]);
+          if (saved) input.value = saved;
+
+          cell.appendChild(input);
+          table.rows[r].appendChild(cell);
+        }
+      }
+    }
+
+    // دالة مسح البيانات
+    function clearData() {
+      if (confirm("هل أنت متأكد أنك تريد مسح جميع البيانات؟")) {
+        localStorage.clear();
+        location.reload();
+      }
+    }
+  </script>
+</body>
+</html>
+
