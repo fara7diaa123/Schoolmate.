@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>SchoolMate - كشكولك الرقمي</title>
+</head>
+<body bgcolor="#C8BBBE">
+
+  <h1 align="center">كشكولك الرقمي - SchoolMate</h1>
+  <p align="center">كشكولك الرقمي لمتابعة الغياب، تسجيل الواجبات، والتقارير اليومية</p>
+  <hr color="white" size="4">
+
+  <table width="100%" cellspacing="0" cellpadding="10">
+    <tr valign="top">
+   
+      <td width="65%">
+       
+        <div>
+          <label for="roleSelect">اختر الدور: </label>
+          <select id="roleSelect">
+            <option value="student">طالب</option>
+            <option value="teacher">معلم</option>
+          </select>
+
+          &nbsp;&nbsp;
+
+          <label for="gradeSelect">اختر الصف: </label>
+          <select id="gradeSelect">
+            <option value="1">الصف الأول الثانوي</option>
+            <option value="2">الصف الثاني الثانوي</option>
+          </select>
+        </div>
+
+        <h2>القائمة الرئيسية:</h2>
+        <ul id="menu"></ul>
+
+        <p id="date"></p>
+      </td>
+
+      <td width="35%" align="center" bgcolor="#C8BBBE">  
+        <img src="study image.jpg" alt="School" width="80%" style="margin-bottom:15px;">
+        <img src="study image 2.jpg" alt="School" width="60%">
+      </td>
+
+    </tr>
+  </table>
+
+  <script>          
+    document.getElementById("date").innerHTML =
+      "تاريخ اليوم: " + new Date().toLocaleDateString();
+         
+    window.onload = function () {
+      if (!sessionStorage.getItem("welcomeShown")) {
+        alert("أهلا بك في SchoolMate زميلك في المدرسة");
+        sessionStorage.setItem("welcomeShown", "true");
+      }
+
+      if (localStorage.getItem("role")) {
+        document.getElementById("roleSelect").value = localStorage.getItem("role");
+      }
+      if (localStorage.getItem("grade")) {
+        document.getElementById("gradeSelect").value = localStorage.getItem("grade");
+      }
+
+      updateMenu();  
+    };
+
+    var roleSelect = document.getElementById("roleSelect");
+    var gradeSelect = document.getElementById("gradeSelect");
+    var menu = document.getElementById("menu");
+
+    function updateMenu() {
+      var role = roleSelect.value;
+      var grade = gradeSelect.value;
+
+      localStorage.setItem("role", role);
+      localStorage.setItem("grade", grade);
+
+      menu.innerHTML = "";
+
+      // 👩‍🎓 الطالب
+      if (role === "student" && grade === "1") {
+        menu.innerHTML += "<li><a href='student attendance1.html'>الغياب والحضور</a></li>";
+        menu.innerHTML += "<li><a href='student grades1.html'>درجات الامتحانات الشهرية</a></li>";
+      }
+      else if (role === "student" && grade === "2") {
+        menu.innerHTML += "<li><a href='student attendance2.html'>الغياب والحضور</a></li>";
+        menu.innerHTML += "<li><a href='student grades2.html'>درجات الامتحانات الشهرية</a></li>";
+      }
+
+      // 👩‍🏫 المعلم
+      else if (role === "teacher" && grade === "1") {
+        menu.innerHTML += "<li><a href='attendance1.html'>إدارة غياب الصف الأول</a></li>";
+        menu.innerHTML += "<li><a href='grades1.html'>إدخال درجات الصف الأول</a></li>";
+      }
+      else if (role === "teacher" && grade === "2") {
+        menu.innerHTML += "<li><a href='attendance2.html'>إدارة غياب الصف الثاني</a></li>";
+        menu.innerHTML += "<li><a href='grades2.html'>إدخال درجات الصف الثاني</a></li>";
+      }
+    }
+
+    roleSelect.addEventListener("change", updateMenu);
+    gradeSelect.addEventListener("change", updateMenu);
+  </script>
+</body>
+</html>
