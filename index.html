@@ -106,7 +106,25 @@
     roleSelect.addEventListener("change", updateMenu);
     gradeSelect.addEventListener("change", updateMenu);
   </script>
-  <script src="//code.tidio.co/vfcopcmpd4hllmiz5zwhclaozpngqngr.js" async></script>
+<script src="//code.tidio.co/vfcopcmpd4hllmiz5zwhclaozpngqngr.js" async></script>
+<script>
+  // بعد اختيار الطالب
+  const studentSelect = document.getElementById("studentSelect");
+
+  studentSelect.addEventListener("change", function() {
+    const studentName = this.value;
+
+    if (window.tidioChatApi) {
+      // نعرف البوت باسم الطالب بدل الإيميل
+      window.tidioChatApi.setVisitorData({
+        name: studentName,
+        email: studentName + "@schoolmate.local" // ايميل وهمي للتسجيل فقط
+      });
+    }
+  });
+</script>
+
 </body>
 </html>
+
 
