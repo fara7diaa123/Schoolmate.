@@ -106,36 +106,9 @@
     roleSelect.addEventListener("change", updateMenu);
     gradeSelect.addEventListener("change", updateMenu);
   </script>
-<script src="//code.tidio.co/vfcopcmpd4hllmiz5zwhclaozpngqngr.js" async></script>
-<script>
-  // لما الشات يشتغل
-  window.tidioChatApi.on("ready", function() {
-    // للطالب: ناخد الاسم من السلكت
-    const studentSelect = document.getElementById("studentSelect");
-    let name = "زائر"; // الاسم الافتراضي لو ما اخترش
-
-    if(studentSelect && studentSelect.value){
-      name = studentSelect.value;
-    }
-
-    // للمعلم: ممكن الاسم ثابت
-    // let name = "معلم";
-
-    // توليد إيميل وهمي
-    let email = name.toLowerCase().replace(/\s/g, "") + "@schoolmate.local";
-
-    // إعداد بيانات الزائر للبوت
-    window.tidioChatApi.setVisitorData({
-      name: name,
-      email: email
-    });
-  });
-</script>
-
-
-
 </body>
 </html>
+
 
 
 
