@@ -59,7 +59,7 @@
 
     const subjects = ["عربي","إنجليزي","ماث","ساينس","تاريخ","فلسفة"];
     const months = ["أكتوبر","نوفمبر","ديسمبر"];
-    const className = "الصف الثاني الثانوي"; // زي المدرس
+    const className = "الصف الثاني الثانوي";
 
     window.showGrades = async function () {
       const studentName = document.getElementById("studentSelect").value;
@@ -77,7 +77,6 @@
 
       let foundGrades = false;
 
-      // جلب الدرجات من Firebase
       for (let m of months) {
         for (let s of subjects) {
           let gradeRef = ref(db, "grades/" + className + "/" + studentName + "/" + m + "/" + s);
@@ -102,3 +101,4 @@
   </script>
 </body>
 </html>
+
