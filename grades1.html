@@ -31,7 +31,7 @@
   <p style="cursor:pointer; color:blue;" onclick="window.location.href='index.html'"> الرجوع للصفحة الرئيسية</p>
 
   <script type="module">
-    // ---------------- Firebase ----------------
+    
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getDatabase, ref, set, get, child, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
@@ -49,16 +49,13 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // ---------------- إعداد الجدول ----------------
     const subjects = ["عربي","إنجليزي","ماث","ساينس","تاريخ","فلسفة"];
     const months = ["أكتوبر","نوفمبر","ديسمبر"];
     const table = document.getElementById("gradesTable");
     const maxGrade = 20;
 
-    // اسم الصف الحالي
-    const className = "الصف الاول الثانوي"; // <<< هنا اتغير بس
+    const className = "الصف الاول الثانوي";
 
-    // إضافة عناوين المواد والشهور
     for (let m = 0; m < months.length; m++) {
       for (let s = 0; s < subjects.length; s++) {
         let header = document.createElement("th");
@@ -67,7 +64,6 @@
       }
     }
 
-    // إضافة خانات الدرجات
     for (let r = 1; r < table.rows.length; r++) {
       let studentName = table.rows[r].cells[0].innerText;
       for (let m = 0; m < months.length; m++) {
@@ -79,7 +75,6 @@
           input.max = maxGrade;
           input.style.width = "50px";
 
-          // لما يكتب المدرس الدرجة
           input.oninput = function () {
             if (input.value > maxGrade) {
               alert("الدرجة لا يمكن أن تتجاوز " + maxGrade);
@@ -87,12 +82,10 @@
             }
           };
 
-          // حفظ الدرجة في Firebase (داخل الصف الحالي)
           input.onchange = function () {
             set(ref(db, "grades/" + className + "/" + studentName + "/" + months[m] + "/" + subjects[s]), input.value);
           };
 
-          // استرجاع الدرجات من Firebase عند تحميل الصفحة
           get(child(ref(db), "grades/" + className + "/" + studentName + "/" + months[m] + "/" + subjects[s]))
             .then((snapshot) => {
               if (snapshot.exists()) {
@@ -106,7 +99,6 @@
       }
     }
 
-    // ---------------- مسح بيانات الصف الحالي فقط ----------------
     window.clearData = function () {
       if (confirm("هل انت متاكد انك تريد حذف جميع البيانات ")) {
         remove(ref(db, "grades/" + className)).then(() => {
