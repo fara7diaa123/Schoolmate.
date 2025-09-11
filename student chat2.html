@@ -134,12 +134,10 @@
     </div>
   </div>
 
-  <!-- Firebase -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
     import { getDatabase, ref, push, onChildAdded, onChildChanged, onChildRemoved, remove, update } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 
-    // 🔹 بيانات مشروعك
     const firebaseConfig = {
       apiKey: "AIzaSyBoqPEnCjtYPbWI9yYXg9eBdrPk5KvSHOg",
       authDomain: "schoolmate-d49cd.firebaseapp.com",
@@ -153,13 +151,12 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-    const messagesRef = ref(db, "class2/messages"); // ✅ هنا غيرنا من class1 لـ class2
+    const messagesRef = ref(db, "class2/messages"); 
 
     const messagesDiv = document.getElementById("messages");
     const input = document.getElementById("messageInput");
     let currentUser = "";
 
-    // 🔹 تغيير المستخدم
     document.getElementById("username").addEventListener("change", e => {
       currentUser = e.target.value;
       Array.from(messagesDiv.children).forEach(msg => {
@@ -168,7 +165,6 @@
       });
     });
 
-    // 🔹 إرسال رسالة
     window.sendMessage = function () {
       if (!currentUser) {
         alert("من فضلك اختر اسمك");
@@ -186,7 +182,6 @@
       input.value = "";
     }
 
-    // 🔹 إنتر يرسل الرسالة
     input.addEventListener("keydown", e => {
       if (e.key === "Enter") {
         e.preventDefault();
@@ -194,7 +189,6 @@
       }
     });
 
-    // 🔹 تحويل الوقت لتنسيق جميل
     function formatTime(ms) {
       const d = new Date(ms);
       const date = d.toLocaleDateString("ar-EG");
@@ -202,7 +196,6 @@
       return `${date} - ${time}`;
     }
 
-    // 🔹 عرض الرسالة
     function renderMessage(key, data) {
       let div = document.getElementById(key);
       if (!div) {
@@ -226,7 +219,6 @@
       messagesDiv.scrollTop = messagesDiv.scrollHeight;
     }
 
-    // 🔹 تحديث شكل الرسالة وأزرارها
     function updateActions(div, author) {
       div.classList.remove("mine", "other"); 
       const actions = div.querySelector(".actions");
@@ -246,7 +238,6 @@
       }
     }
 
-    // Firebase Events
     onChildAdded(messagesRef, (snapshot) => {
       renderMessage(snapshot.key, snapshot.val());
     });
@@ -260,16 +251,15 @@
       if (div) div.remove();
     });
 
-    // حذف رسالة
     window.deleteMessage = function(key) {
-      remove(ref(db, "class2/messages/" + key)); // ✅ برضه عدلنا هنا
+      remove(ref(db, "class2/messages/" + key)); 
     }
+    
 
-    // تعديل رسالة
-    window.editMessage = function(key, oldText) {
+     window.editMessage = function(key, oldText) {
       const newText = prompt("عدل رسالتك:", oldText);
       if (newText && newText.trim() !== "") {
-        update(ref(db, "class2/messages/" + key), { // ✅ وعدلنا هنا كمان
+        update(ref(db, "class1/messages/" + key), { 
           text: newText,
           editedAt: Date.now()
         });
@@ -278,3 +268,5 @@
   </script>
 </body>
 </html>
+
+
