@@ -120,12 +120,12 @@
     </div>
   </div>
 
-  <!-- Firebase -->
+ 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
     import { getDatabase, ref, push, onChildAdded, onChildChanged, onChildRemoved, remove, update } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 
-    // بيانات مشروعك
+    
     const firebaseConfig = {
       apiKey: "AIzaSyBoqPEnCjtYPbWI9yYXg9eBdrPk5KvSHOg",
       authDomain: "schoolmate-d49cd.firebaseapp.com",
@@ -139,13 +139,12 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-    const messagesRef = ref(db, "class2/messages"); // 🔹 تغيير المسار
+    const messagesRef = ref(db, "class2/messages"); 
 
     const messagesDiv = document.getElementById("messages");
     const input = document.getElementById("messageInput");
-    const currentUser = "معلم"; // 🔹 المعلم ثابت
+    const currentUser = "المعلم"; 
 
-    // إرسال رسالة
     window.sendMessage = function () {
       const text = input.value;
       if (text.trim() === "") return;
@@ -159,7 +158,6 @@
       input.value = "";
     }
 
-    // إنتر يرسل الرسالة
     input.addEventListener("keydown", e => {
       if (e.key === "Enter") {
         e.preventDefault();
@@ -167,7 +165,6 @@
       }
     });
 
-    // تنسيق الوقت
     function formatTime(ms) {
       const d = new Date(ms);
       const date = d.toLocaleDateString("ar-EG");
@@ -175,7 +172,6 @@
       return `${date} - ${time}`;
     }
 
-    // عرض رسالة
     function renderMessage(key, data) {
       let div = document.getElementById(key);
       if (!div) {
@@ -199,7 +195,6 @@
       messagesDiv.scrollTop = messagesDiv.scrollHeight;
     }
 
-    // تحديث أزرار
     function updateActions(div, author) {
       const actions = div.querySelector(".actions");
       if (actions) actions.remove();
@@ -218,7 +213,6 @@
       }
     }
 
-    // Firebase Events
     onChildAdded(messagesRef, (snapshot) => {
       renderMessage(snapshot.key, snapshot.val());
     });
@@ -232,16 +226,14 @@
       if (div) div.remove();
     });
 
-    // حذف
     window.deleteMessage = function(key) {
-      remove(ref(db, "class2/messages/" + key)); // 🔹 تعديل المسار
+      remove(ref(db, "class2/messages/" + key));
     }
 
-    // تعديل
     window.editMessage = function(key, oldText) {
       const newText = prompt("عدل رسالتك:", oldText);
       if (newText && newText.trim() !== "") {
-        update(ref(db, "class2/messages/" + key), {  // 🔹 تعديل المسار
+        update(ref(db, "class2/messages/" + key), {  
           text: newText,
           editedAt: Date.now()
         });
@@ -250,3 +242,5 @@
   </script>
 </body>
 </html>
+
+
