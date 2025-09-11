@@ -259,7 +259,7 @@
      window.editMessage = function(key, oldText) {
       const newText = prompt("عدل رسالتك:", oldText);
       if (newText && newText.trim() !== "") {
-        update(ref(db, "class1/messages/" + key), { 
+        update(ref(db, "class2/messages/" + key), { 
           text: newText,
           editedAt: Date.now()
         });
@@ -268,5 +268,6 @@
   </script>
 </body>
 </html>
+
 
 
