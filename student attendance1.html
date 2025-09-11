@@ -38,12 +38,10 @@
   <br>
   <p style="cursor:pointer; color:blue;" onclick="window.location.href='index.html'">الرجوع للصفحة الرئيسية</p>
 
-  <!-- الجافاسكريبت -->
   <script type="module">
     import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
     import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
-    // 🔑 بيانات Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyBoqPEnCjtYPbWI9yYXg9eBdrPk5KvSHOg",
       authDomain: "schoolmate-d49cd.firebaseapp.com",
@@ -59,7 +57,7 @@
     const db = getDatabase(app);
 
     const days = ["الأحد","الإثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
-    const startDate = new Date(2025, 9, 12); // 9 = أكتوبر
+    const startDate = new Date(2025, 9, 12); 
     const totalDays = 14;
 
     window.showAttendance = async function () {
@@ -85,14 +83,12 @@
         const formattedDate = date.toLocaleDateString("ar-EG");
 
         if (date.getDay() === 5 || date.getDay() === 6) {
-          // الجمعة والسبت إجازة
           let tr = document.createElement("tr");
           tr.innerHTML = `<td>${dayName}</td><td>${formattedDate}</td><td style="background-color:#EBDDE2;">إجازة</td>`;
           tbody.appendChild(tr);
           continue;
         }
 
-        // 🔍 قراءة من Firebase
         const snapshot = await get(ref(db, `attendance/الصف_الأول/${studentName}/${i}`));
         let status = snapshot.exists() ? snapshot.val().status : null;
 
@@ -116,6 +112,6 @@
       }
     }
   </script>
-  <script src="//code.tidio.co/vfcopcmpd4hllmiz5zwhclaozpngqngr.js" async></script>
 </body>
 </html>
+
