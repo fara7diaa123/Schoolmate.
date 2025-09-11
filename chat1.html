@@ -202,8 +202,8 @@
         const actionsDiv = document.createElement("div");
         actionsDiv.classList.add("actions");
         actionsDiv.innerHTML = `
-          <span onclick="editMessage('${div.id}', \`${div.querySelector(".text").innerText}\`)"> تعديل</span> |
-          <span onclick="deleteMessage('${div.id}')"> حذف</span>
+          <span onclick="editMessage('${div.id}', \`${div.querySelector(".text").innerText}\`)">✏️ تعديل</span> |
+          <span onclick="deleteMessage('${div.id}')">🗑️ حذف</span>
         `;
         div.appendChild(actionsDiv);
       } else {
@@ -240,3 +240,5 @@
   </script>
 </body>
 </html>
+
+
