@@ -71,12 +71,10 @@
         return;
       }
 
-      tbody.innerHTML = ""; // مسح الجدول القديم
-      noGradesMsg.style.display = "none"; // اخفاء رسالة لا يوجد بيانات
-
+      tbody.innerHTML = ""; 
+      noGradesMsg.style.display = "none";
       let foundGrades = false;
 
-      // جلب الدرجات من Firebase
       for (let m of months) {
         for (let s of subjects) {
           let gradeRef = ref(db, "grades/" + className + "/" + studentName + "/" + m + "/" + s);
@@ -101,3 +99,5 @@
   </script>
 </body>
 </html>
+
+
