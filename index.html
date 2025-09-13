@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>SchoolMate - كشكولك الرقمي</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin:0;
+      font-family: Tahoma, Arial, sans-serif;
+      background:#C8BBBE;
+      color:#333;
+    }
+
+    header {
+      text-align:center;
+      background:#5D4037;
+      color:#fff;
+      padding:10px 0;
+    }
+    header h1 { margin:0; font-size:24px; }
+
+    .tagline {
+      text-align:center;
+      background:#5D4037;
+      color:#fff;
+      padding:6px;
+      font-size:14px;
+      margin:0;
+    }
+
+    #navbar {
+      background:#8D6E63;
+      padding:8px;
+      display:flex;
+      align-items:center;
+      gap:15px;
+    }
+    #navbar label {
+      color:#fff;
+      font-size:14px;
+    }
+    #navbar select {
+      padding:4px 6px;
+      border-radius:4px;
+    }
+    #navbar ul {
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:flex;
+      flex:1;
+      justify-content:center;
+    }
+    #navbar > ul > li {
+      position:relative;
+      margin:0 10px;
+    }
+    #navbar > ul > li > a {
+      color:white;
+      text-decoration:none;
+      padding:6px 8px;
+      display:inline-block;
+      cursor:pointer;
+      font-size:15px;
+    }
+
+    .submenu {
+      display:none !important;
+      position:absolute;
+      top:32px; right:0;
+      background:#fff;
+      padding:5px;
+      border-radius:6px;
+      box-shadow:0 3px 8px rgba(0,0,0,0.15);
+      min-width:140px;
+      z-index:100;
+    }
+    .submenu li { margin:4px 0; }
+    .submenu a {
+      color:#333;
+      text-decoration:none;
+      display:block;
+      padding:6px 8px;
+      font-size:14px;
+      border-radius:4px;
+    }
+    .submenu a:hover { background:#eee; }
+    .submenu.open { display:block !important; }
+
+    .hero img {
+      display:block;
+      margin: 20px auto 0;
+      width:60%;
+      max-width:700px;
+      border-radius:10px;
+      box-shadow:0 3px 8px rgba(0,0,0,0.3);
+    }
+
+    .about {
+      max-width:800px;
+      margin:20px auto;
+      padding:15px;
+      text-align:center;
+      background:#fff;
+      border-radius:8px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.05);
+      font-size:15px;
+    }
+    .about h2 { font-size:18px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>SchoolMate - كشكولك الرقمي</h1>
+  </header>
+  <p class="tagline">كشكولك الرقمي لمتابعة الغياب، تسجيل الواجبات، والتقارير اليومية</p>
+
+  <div id="navbar">
+    <label for="roleSelect">اختر الدور:</label>
+    <select id="roleSelect">
+      <option value="student">طالب</option>
+      <option value="teacher">معلم</option>
+    </select>
+
+    <ul id="studentMenu">
+      <li>
+        <a href="#" class="top-link">الغياب والحضور</a>
+        <ul class="submenu">
+          <li><a href="student attendance1.html">الصف الأول الثانوي</a></li>
+          <li><a href="student attendance2.html">الصف الثاني الثانوي</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#" class="top-link">الدرجات</a>
+        <ul class="submenu">
+          <li><a href="student grades1.html">الصف الأول الثانوي</a></li>
+          <li><a href="student grades2.html">الصف الثاني الثانوي</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#" class="top-link">التواصل</a>
+        <ul class="submenu">
+          <li><a href="student chat1.html">الصف الأول الثانوي</a></li>
+          <li><a href="student chat2.html">الصف الثاني الثانوي</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <ul id="teacherMenu" style="display:none;">
+      <li>
+        <a href="#" class="top-link">الغياب والحضور</a>
+        <ul class="submenu">
+          <li><a href="attendance1.html">الصف الأول الثانوي</a></li>
+          <li><a href="attendance2.html">الصف الثاني الثانوي</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#" class="top-link">الدرجات</a>
+        <ul class="submenu">
+          <li><a href="grades1.html">الصف الأول الثانوي</a></li>
+          <li><a href="grades2.html">الصف الثاني الثانوي</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#" class="top-link">التواصل</a>
+        <ul class="submenu">
+          <li><a href="chat1.html">الصف الأول الثانوي</a></li>
+          <li><a href="chat2.html">الصف الثاني الثانوي</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="hero">
+    <img src="study image 1.jpg">
+  </div>
+
+  <div class="about">
+    <h2>نبذة عن الموقع</h2>
+    <p>
+      يعد موقع SchoolMate - كشكولك الرقمي أداة مبتكرة لدعم العملية التعليمية، حيث يوفر للطلاب والمعلمين وسيلة سهلة لمتابعة الحضور والغياب، ومعرفة الدرجات الشهرية. كما يتيح قنوات تواصل فعّالة بين الطالب والمعلم لتعزيز المشاركة وتنظيم العملية التعليمية بشكل أكثر كفاءة.
+    </p>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const topLinks = document.querySelectorAll('#navbar .top-link');
+      const roleSelect = document.getElementById('roleSelect');
+      const studentMenu = document.getElementById('studentMenu');
+      const teacherMenu = document.getElementById('teacherMenu');
+
+      const savedRole = localStorage.getItem('role');
+      if (savedRole) {
+        roleSelect.value = savedRole;
+        if (savedRole === 'student') {
+          studentMenu.style.display = 'flex';
+          teacherMenu.style.display = 'none';
+        } else {
+          studentMenu.style.display = 'none';
+          teacherMenu.style.display = 'flex';
+        }
+      }
+
+      roleSelect.addEventListener('change', () => {
+        const selectedRole = roleSelect.value;
+        localStorage.setItem('role', selectedRole); 
+        if (selectedRole === 'student') {
+          studentMenu.style.display = 'flex';
+          teacherMenu.style.display = 'none';
+        } else {
+          studentMenu.style.display = 'none';
+          teacherMenu.style.display = 'flex';
+        }
+      });
+
+      function setupSubmenu(links) {
+        links.forEach(link => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const submenu = link.nextElementSibling;
+
+            document.querySelectorAll('.submenu').forEach(sm => {
+              if (sm !== submenu) sm.classList.remove('open');
+            });
+
+            submenu.classList.toggle('open');
+          });
+        });
+      }
+
+      setupSubmenu(document.querySelectorAll('#navbar .top-link'));
+
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('#navbar')) {
+          document.querySelectorAll('.submenu').forEach(sm => sm.classList.remove('open'));
+        }
+      });
+    });
+  </script>
+</body>
+</html>
